@@ -1,0 +1,66 @@
+README
+>Carlos Da Silva (10-10175)
+>Patricia Wilthew (09-10910)
+
+-Limitaciones: El proyecto no cuenta con limitaciones, pues realiza todo lo soli-
+citado en el enunciado del mismo.
+
+-Descripción de funcionamiento: El proyecto levanta una arquitectura cliente/servidor
+en la cual existen 2 servidores: el de archivos centralizados y el de autenticación,
+así como un programa cliente. Basándonos en RMI de Java, el servidor de archivos ofrece
+al cliente un objeto, y es mediante la llamada a métodos de dicho objeto remoto
+que el cliente logra realizar las funcionalidades deseadas.
+El servidor de archivos no puede brindar sus funcionalidades (o métodos) al menos
+de que verifique que el cliente solicitándolo esté autenticado; para ello, se
+tiene un servidor de autenticación que ofrece un objeto con cuyos métodos se
+logra realizar tal autenticación. Entonces, como atributo del objeto "servidor de
+archivos" se tiene un objeto de la clase "servidor de autenticación" que permite
+que antes de la correcta invocación de sus métodos se verifique al cliente en
+cuestión.
+
+-Aspectos importantes:
+
+  *El comando "lls" por su naturaleza local, no requiere de la utilización del
+  objeto remoto.
+  *El comando "log" del servidor, tal como se solicita, despliega en pantalla
+  todas las solicitudes recibidas, sean de usuarios autenticados o no.
+  *En caso de que un cliente desee subir un archivo al servidor, y en el mismo
+  ya se encuentre uno de mismo nombre, se le alertará de esta situación para
+  que tome cartas en el asunto.
+  *El comando log mostrar� los �ltimos requests recibidos en el siguiente formato:
+  <comando>,<usuario>.
+  *Si un cliente desea bajar un archivo, y localmente posee un archivo de mismo
+  nombre, se sobreescribir�.
+
+-Explicación de archivos enviados:
+  *<c_rmifs>: Programa cliente del sistema. Hace uso del objeto
+  remoto ofrecido por el servidor de archivos. Ofrece un menú para el usuario,
+  y ejecuta los comandos del archivo pasado como parámetros (si fuese el caso).
+
+  *<FileManager>: Interfaz de la clase de la cual
+  el servidor ofrecerá un objeto remoto.
+
+  *<FileManagerImpl>: Implementación de la interfaz mencionada.
+
+  *<s_rmifs>: Servidor de archivos centralizados. En él, se
+  instancia un objeto de la clase mencionada previamente y se ofrece (se registra
+  en el RMIregistry).
+
+  *<Authentication>: Interfaz de la clase de la cual el
+  servidor de autenticación ofrecerá un objeto.
+
+  *<AuthenticationImpl>: Implementación de la interfaz de la
+  clase asociada al servidor de autenticación.
+
+  *<a_rmifs>: Servidor de autenticación. Creará y ofrecerá un 
+  objeto de la clase asociada al servidor de archivos.
+
+  *Makefile: para la compilación de todos los archivos ".java".
+
+-Compilación/ejecución: Se cuenta con un makefile, por lo que para obtener los .class de
+todos los archivos que se encuentren en la carpeta deseada basta con realizar
+"make". Para correr el sistema, basta con correr primero el servidor de autenticación,
+luego el de archivos, y por el último el cliente. (En donde se encuentre el cliente
+también deberá estar la interfaz para el objeto del servidor de archivos, y en donde
+se encuentre el servidor de archivos, debe encontrarse la interfaz del objeto del
+servidor de autenticación.

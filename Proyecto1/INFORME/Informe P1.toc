@@ -1,0 +1,5 @@
+\select@language {spanish}
+\contentsline {section}{\numberline {1}Enunciado}{2}
+\contentsline {section}{\numberline {2}Diagrama de secuencias}{4}
+\contentsline {section}{\numberline {3}Funcionamiento}{5}
+\contentsline {section}{\numberline {4}Detalles sobre implementaci'on}{6}
